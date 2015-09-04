@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNet.Identity
+
+
+@if (!Request.IsAuthenticated)
+{
+    <img src="~/Content/popular.png"/>
+    <strong>Вход на сайт</strong>
+    <hr/>
+    using (Html.BeginForm("Login", "Account", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div align="right">
+            <span>E-mail</span>
+            <input type="text" name="Email"/>
+            <br/>
+            <span>Пароль</span>
+            <input type="password" name="Password"/>
+            <br/>
+            <input type="submit"/>
+            <br/>
+            @Html.ActionLink("Регистрация на сайте!", "Register", "Account")
+            <br/>
+            @*@Html.ActionLink("Забыли пароль?", "ForgotPassword", "Account")*@
+            <br/>
+        </div>
+    }
+}
+else
+{
+    
+        
+    <img src="~/Content/popular.png" />
+    <strong>Добро пожаловать</strong>
+    <hr/>
+    <p>@User.Identity.Name</p>
+    <br/>
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+    <input type="submit" value="Выход" />
+    }
+
+}

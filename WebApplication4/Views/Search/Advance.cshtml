@@ -1,0 +1,31 @@
+﻿@model dynamic
+
+@{
+    //ViewBag.Title = "title";
+
+}
+
+<div class="">
+
+</div>
+
+
+<form class="Search" action=@Url.Action("Index", "Search",
+new
+{
+    page = 0,
+    title = ViewBag.Title,
+    author = ViewBag.Author,
+    description = ViewBag.Description,
+    genreId = ViewBag.GenreID
+}, null) method="GET">
+
+    <p>Название:</p> <input type="text" name="title" value=@ViewBag.Title />
+    <p>Автор:</p>
+    <input type="text" name="author" />
+    <p>Описание:</p>
+    <input type="text" name="description" />
+    <br />
+    <br />
+    <input type="submit" title="Найти" value="Найти">
+</form>

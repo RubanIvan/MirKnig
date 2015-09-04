@@ -1,0 +1,69 @@
+﻿@model System.Data.Entity.Core.Objects.ObjectResult<WebApplication4.GetBookPage_Result>
+
+@*@{ViewBag.Title = "title";}*@
+
+@Html.Partial("PartialNavPanel")
+
+<div class="content">
+
+
+    @{
+        foreach (GetBookPage_Result BookRow in Model)
+        {
+            <div class="infoboxStory">
+                <div class="row">
+                    <div class="col-md-8">
+                        <a href=@Url.Action("Index", "Book", new {bookid = BookRow.BookId})>
+                            <h2>@BookRow.Title</h2>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4 catalog" align="right">
+                        <span>Категория: </span>
+                        @Html.ActionLink(@BookRow.GenreName, "Index", "Genre", new { genreid = BookRow.GenreID, page = 0 }, null)
+                    </div>
+                </div>
+
+
+                <hr />
+                <div class="BookCover">
+                    <a href=@Url.Action("Index", "Book", new {bookid = BookRow.BookId})>
+                        <img src="/Content/Img/@BookRow.CoverFileName" />
+                    </a>
+                </div>
+                <div class="BookCoverText">
+                    <span class="BookHeader">Название: </span><span>@BookRow.Title</span><br />
+                    <span class="BookHeader">Автор: </span><span>@BookRow.Author</span><br />
+                    <span class="BookHeader">Издательство: </span><span>@BookRow.Publisher</span><br />
+
+                    @if (BookRow.Year != "")
+                    {
+                        <span class="BookHeader">Год издания: </span>
+                        <span>@BookRow.Year</span>
+                        <br />
+                    }
+
+                    @if (BookRow.Pages != null)
+                    {
+                        <span class="BookHeader">Страниц: </span>
+                        <span>@BookRow.Pages</span>
+                        <br />
+                    }
+
+
+                    <span class="BookHeader">Жанр: </span><span>@BookRow.GenreName</span><br />
+                    <span class="BookHeader">Язык: </span><span>@BookRow.LanguageName</span><br />
+                    <br />
+                    <br />
+                    <p>@BookRow.Description</p>
+                </div>
+                <a class="btn btn-default" href=@Url.Action("Index", "Book", new {bookid = BookRow.BookId}) role="button">Скачать</a>
+            </div>
+            <div class="clear"></div>
+
+        }
+    }
+
+
+</div>
+@Html.Partial("PartialNavPanel")

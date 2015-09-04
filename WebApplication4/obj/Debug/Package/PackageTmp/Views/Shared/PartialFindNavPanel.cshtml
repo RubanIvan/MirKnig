@@ -1,0 +1,251 @@
+﻿@{
+    string SMaxPage = ViewBag.MaxPage.ToString();
+
+
+
+    if (ViewBag.MaxPage < 10)
+    {
+        
+        <div class="pagenav" align="center">
+            <ul>
+                @for (int i = 0; i < ViewBag.CurPage; i++)
+                {
+                    <li>
+                        @Html.ActionLink(i.ToString(), "Index", "Search", new
+                   {
+                       page = i,
+                       title = ViewBag.Title,
+                       author = ViewBag.Author,
+                       description = ViewBag.Description,
+                       genreId = ViewBag.GenreID
+                   }, null)
+                    </li>
+                }
+                <li><span>@ViewBag.CurPage</span></li>
+
+                @for (int i = ViewBag.CurPage + 1; i < ViewBag.MaxPage + 1; i++)
+                {
+                    <li>
+                        @Html.ActionLink(i.ToString(), "Index", "Search", new
+                   {
+                       page = i,
+                       title = ViewBag.Title,
+                       author = ViewBag.Author,
+                       description = ViewBag.Description,
+                       genreId = ViewBag.GenreID
+                   }, null)
+                    </li>
+                }
+
+            </ul>
+        </div>
+
+                return;
+    }
+
+    <div class="pagenav" align="center">
+        <ul>
+
+            @if (ViewBag.CurPage > 0)
+            {
+                <li>
+
+                    @Html.ActionLink("Назад", "Index", "Search", new
+                   {
+                       page = ViewBag.CurPage - 1,
+                       title = ViewBag.Title,
+                       author = ViewBag.Author,
+                       description = ViewBag.Description,
+                       genreId = ViewBag.GenreID
+                   }, null)
+                </li>
+
+            }
+            else
+            {
+                <li><span>Назад</span></li>
+            }
+
+
+            @if (ViewBag.CurPage <= 5)
+            {
+                for (int i = 0; i < ViewBag.CurPage; i++)
+                {
+                    <li>
+
+                        @Html.ActionLink(i.ToString(), "Index", "Search", new
+                   {
+                       page = i,
+                       title = ViewBag.Title,
+                       author = ViewBag.Author,
+                       description = ViewBag.Description,
+                       genreId = ViewBag.GenreID
+                   }, null)
+                    </li>
+                }
+
+                <li><span>@ViewBag.CurPage</span></li>
+
+                for (int i = ViewBag.CurPage + 1; i < 10; i++)
+                {
+                    <li>
+
+                        @Html.ActionLink(i.ToString(), "Index", "Search", new
+                   {
+                       page = i,
+                       title = ViewBag.Title,
+                       author = ViewBag.Author,
+                       description = ViewBag.Description,
+                       genreId = ViewBag.GenreID
+                   }, null)
+                    </li>
+                }
+
+                <li><span>...</span></li>
+
+                <li>
+
+                    @Html.ActionLink(SMaxPage, "Index", "Search", new
+                   {
+                       page = ViewBag.MaxPage,
+                       title = ViewBag.Title,
+                       author = ViewBag.Author,
+                       description = ViewBag.Description,
+                       genreId = ViewBag.GenreID
+                   }, null)
+                </li>
+            }
+
+            @if (ViewBag.CurPage > 5 && ViewBag.CurPage < ViewBag.MaxPage - 5)
+            {
+
+                <li>
+
+                    @Html.ActionLink("0", "Index", "Search", new
+                   {
+                       page = ViewBag.MaxPage,
+                       title = ViewBag.Title,
+                       author = ViewBag.Author,
+                       description = ViewBag.Description,
+                       genreId = ViewBag.GenreID
+                   }, null)
+                </li>
+                <li><span>...</span></li>
+                for (int i = ViewBag.CurPage - 4; i < ViewBag.CurPage; i++)
+                {
+                    <li>
+
+                        @Html.ActionLink(i.ToString(), "Index", "Search", new
+                   {
+                       page = i,
+                       title = ViewBag.Title,
+                       author = ViewBag.Author,
+                       description = ViewBag.Description,
+                       genreId = ViewBag.GenreID
+                   }, null)
+                    </li>
+                }
+
+                <li><span>@ViewBag.CurPage</span></li>
+
+                for (int i = ViewBag.CurPage + 1; i < ViewBag.CurPage + 5; i++)
+                {
+                    <li>
+
+                        @Html.ActionLink(i.ToString(), "Index", "Search", new
+                   {
+                       page = i,
+                       title = ViewBag.Title,
+                       author = ViewBag.Author,
+                       description = ViewBag.Description,
+                       genreId = ViewBag.GenreID
+                   }, null)
+                    </li>
+                }
+                <li><span>...</span></li>
+                <li>
+
+                    @Html.ActionLink(SMaxPage, "Index", "Search", new
+                   {
+                       page = ViewBag.MaxPage,
+                       title = ViewBag.Title,
+                       author = ViewBag.Author,
+                       description = ViewBag.Description,
+                       genreId = ViewBag.GenreID
+                   }, null)
+                </li>
+            }
+
+
+            @if (ViewBag.CurPage > ViewBag.MaxPage - 6)
+            {
+                <li>
+                    
+                    @Html.ActionLink("0", "Index", "Search", new
+                   {
+                       page = 0,
+                       title = ViewBag.Title,
+                       author = ViewBag.Author,
+                       description = ViewBag.Description,
+                       genreId = ViewBag.GenreID
+                   }, null)
+            </li>
+                <li><span>...</span></li>
+                for (int i = ViewBag.MaxPage - 8; i < ViewBag.CurPage; i++)
+                {
+                    <li>
+                        @Html.ActionLink(i.ToString(), "Index", "Search", new
+                   {
+                       page = i,
+                       title = ViewBag.Title,
+                       author = ViewBag.Author,
+                       description = ViewBag.Description,
+                       genreId = ViewBag.GenreID
+                   }, null)
+                    </li>
+                }
+
+                <li><span>@ViewBag.CurPage</span></li>
+
+                for (int i = ViewBag.CurPage + 1; i < ViewBag.MaxPage + 1; i++)
+                {
+                    <li>
+                        @Html.ActionLink(i.ToString(), "Index", "Search", new
+                   {
+                       page = i,
+                       title = ViewBag.Title,
+                       author = ViewBag.Author,
+                       description = ViewBag.Description,
+                       genreId = ViewBag.GenreID
+                   }, null)
+                    </li>
+                }
+
+            }
+
+
+            @if (ViewBag.CurPage < ViewBag.MaxPage)
+            {
+                <li>
+                   
+                    @Html.ActionLink("Вперед", "Index", "Search", new
+                   {
+                       page = ViewBag.CurPage + 1,
+                       title = ViewBag.Title,
+                       author = ViewBag.Author,
+                       description = ViewBag.Description,
+                       genreId = ViewBag.GenreID
+                   }, null)
+                </li>
+            }
+            else
+            {
+                <li><span>Вперед</span></li>
+            }
+
+
+        </ul>
+
+
+    </div>
+}

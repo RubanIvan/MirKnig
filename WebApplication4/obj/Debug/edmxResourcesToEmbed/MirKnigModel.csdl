@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MirKnigModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Book">
+    <Key>
+      <PropertyRef Name="BookId" />
+    </Key>
+    <Property Name="BookId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Author" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Publisher" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GenreID" Type="Int32" Nullable="false" />
+    <Property Name="Year" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Pages" Type="Int32" />
+    <Property Name="LanguageID" Type="Int32" Nullable="false" />
+    <Property Name="CoverFileName" Type="String" MaxLength="1024" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="2048" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Genre" Relationship="Self.FK_Book_GenreID" FromRole="Book" ToRole="Genre" />
+    <NavigationProperty Name="Language" Relationship="Self.FK_Book_LanguageID" FromRole="Book" ToRole="Language" />
+    <NavigationProperty Name="Comments" Relationship="MirKnigModel.FK_Comments_BookID" FromRole="Book" ToRole="Comments" />
+  </EntityType>
+  <EntityType Name="Genre">
+    <Key>
+      <PropertyRef Name="GenreID" />
+    </Key>
+    <Property Name="GenreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GenreName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Book" Relationship="Self.FK_Book_GenreID" FromRole="Genre" ToRole="Book" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="LanguageID" />
+    </Key>
+    <Property Name="LanguageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LanguageName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Book" Relationship="Self.FK_Book_LanguageID" FromRole="Language" ToRole="Book" />
+  </EntityType>
+  <Association Name="FK_Book_GenreID">
+    <End Role="Genre" Type="Self.Genre" Multiplicity="1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Genre">
+        <PropertyRef Name="GenreID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="GenreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Book_LanguageID">
+    <End Role="Language" Type="Self.Language" Multiplicity="1" />
+    <End Role="Book" Type="Self.Book" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Language">
+        <PropertyRef Name="LanguageID" />
+      </Principal>
+      <Dependent Role="Book">
+        <PropertyRef Name="LanguageID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MirKnigEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Book" EntityType="Self.Book" />
+    <EntitySet Name="Genre" EntityType="Self.Genre" />
+    <EntitySet Name="Language" EntityType="Self.Language" />
+    <AssociationSet Name="FK_Book_GenreID" Association="Self.FK_Book_GenreID">
+      <End Role="Genre" EntitySet="Genre" />
+      <End Role="Book" EntitySet="Book" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Book_LanguageID" Association="Self.FK_Book_LanguageID">
+      <End Role="Language" EntitySet="Language" />
+      <End Role="Book" EntitySet="Book" />
+    </AssociationSet>
+    <FunctionImport Name="FindBook" ReturnType="Collection(MirKnigModel.FindBook_Result)">
+      <Parameter Name="PageId" Mode="In" Type="Int32" />
+      <Parameter Name="title" Mode="In" Type="String" />
+      <Parameter Name="author" Mode="In" Type="String" />
+      <Parameter Name="description" Mode="In" Type="String" />
+      <Parameter Name="genreId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetBookById" ReturnType="Collection(MirKnigModel.GetBookById_Result)">
+      <Parameter Name="BookId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetBookPage" ReturnType="Collection(MirKnigModel.GetBookPage_Result)">
+      <Parameter Name="PageId" Mode="In" Type="Int32" />
+      <Parameter Name="GenreID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetFindMaxPage" ReturnType="Collection(Int32)">
+      <Parameter Name="PageId" Mode="In" Type="Int32" />
+      <Parameter Name="title" Mode="In" Type="String" />
+      <Parameter Name="author" Mode="In" Type="String" />
+      <Parameter Name="description" Mode="In" Type="String" />
+      <Parameter Name="genreId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetMaxPage" ReturnType="Collection(Int32)">
+      <Parameter Name="GenreID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="C__MigrationHistory" EntityType="MirKnigModel.C__MigrationHistory" />
+    <EntitySet Name="AspNetRoles" EntityType="MirKnigModel.AspNetRoles" />
+    <EntitySet Name="AspNetUserClaims" EntityType="MirKnigModel.AspNetUserClaims" />
+    <EntitySet Name="AspNetUserLogins" EntityType="MirKnigModel.AspNetUserLogins" />
+    <EntitySet Name="AspNetUsers" EntityType="MirKnigModel.AspNetUsers" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="MirKnigModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="MirKnigModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="MirKnigModel.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <EntitySet Name="Comments" EntityType="MirKnigModel.Comments" />
+    <AssociationSet Name="FK_Comments_UserID" Association="MirKnigModel.FK_Comments_UserID">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Comments_BookID" Association="MirKnigModel.FK_Comments_BookID">
+      <End Role="Book" EntitySet="Book" />
+      <End Role="Comments" EntitySet="Comments" />
+    </AssociationSet>
+    <FunctionImport Name="AddComment">
+      <Parameter Name="BookId" Mode="In" Type="Int32" />
+      <Parameter Name="UserId" Mode="In" Type="String" />
+      <Parameter Name="Comment" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetComment" ReturnType="Collection(MirKnigModel.GetComment_Result)">
+      <Parameter Name="BookId" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="FindBook_Result">
+    <Property Type="Int32" Name="BookId" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="2048" />
+    <Property Type="String" Name="Author" Nullable="false" MaxLength="2048" />
+    <Property Type="String" Name="Publisher" Nullable="false" MaxLength="2048" />
+    <Property Type="String" Name="GenreName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Year" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Pages" Nullable="true" />
+    <Property Type="String" Name="LanguageName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="CoverFileName" Nullable="false" MaxLength="1024" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="2048" />
+    <Property Type="Int32" Name="GenreID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetBookById_Result">
+    <Property Type="Int32" Name="BookId" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="2048" />
+    <Property Type="String" Name="Author" Nullable="false" MaxLength="2048" />
+    <Property Type="String" Name="Publisher" Nullable="false" MaxLength="2048" />
+    <Property Type="String" Name="GenreName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Year" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Pages" Nullable="true" />
+    <Property Type="String" Name="LanguageName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="CoverFileName" Nullable="false" MaxLength="1024" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="2048" />
+    <Property Type="Int32" Name="GenreID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetBookPage_Result">
+    <Property Type="Int32" Name="BookId" Nullable="false" />
+    <Property Type="String" Name="Title" Nullable="false" MaxLength="2048" />
+    <Property Type="String" Name="Author" Nullable="false" MaxLength="2048" />
+    <Property Type="String" Name="Publisher" Nullable="false" MaxLength="2048" />
+    <Property Type="String" Name="GenreName" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="Year" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Pages" Nullable="true" />
+    <Property Type="String" Name="LanguageName" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="CoverFileName" Nullable="false" MaxLength="1024" />
+    <Property Type="String" Name="Description" Nullable="false" MaxLength="2048" />
+    <Property Type="Int32" Name="GenreID" Nullable="false" />
+  </ComplexType>
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="MirKnigModel.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="MirKnigModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="MirKnigModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="MirKnigModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="MirKnigModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="AspNetRoles" Relationship="MirKnigModel.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+    <NavigationProperty Name="Comments" Relationship="MirKnigModel.FK_Comments_UserID" FromRole="AspNetUsers" ToRole="Comments" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Type="MirKnigModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="MirKnigModel.AspNetUserClaims" Role="AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Type="MirKnigModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="MirKnigModel.AspNetUserLogins" Role="AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Type="MirKnigModel.AspNetRoles" Role="AspNetRoles" Multiplicity="*" />
+    <End Type="MirKnigModel.AspNetUsers" Role="AspNetUsers" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Comments">
+    <Key>
+      <PropertyRef Name="CommentId" />
+    </Key>
+    <Property Name="CommentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BookId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Comment" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="MirKnigModel.FK_Comments_UserID" FromRole="Comments" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Book" Relationship="MirKnigModel.FK_Comments_BookID" FromRole="Comments" ToRole="Book" />
+  </EntityType>
+  <Association Name="FK_Comments_UserID">
+    <End Type="MirKnigModel.AspNetUsers" Role="AspNetUsers" Multiplicity="1" />
+    <End Type="MirKnigModel.Comments" Role="Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Comments_BookID">
+    <End Type="MirKnigModel.Book" Role="Book" Multiplicity="1" />
+    <End Type="MirKnigModel.Comments" Role="Comments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Book">
+        <PropertyRef Name="BookId" />
+      </Principal>
+      <Dependent Role="Comments">
+        <PropertyRef Name="BookId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="GetComment_Result">
+    <Property Type="Int32" Name="BookId" Nullable="false" />
+    <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" />
+    <Property Type="String" Name="Comment" Nullable="false" />
+  </ComplexType>
+</Schema>

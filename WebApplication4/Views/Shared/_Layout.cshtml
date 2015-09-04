@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title – приложение ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+</head>
+<body>
+
+    <header>
+
+        <div class="Logo">
+            <a href=@Url.Action("Index", "Genre", new {genreid = 0, page = 0})>
+                <img src="~/Content/newl.gif" />
+            </a>
+        </div>
+
+        <div class="search">
+            <form action=@Url.Action("Index", "Search") method="GET">
+                <input type="text" name="title" />
+                <input type="submit" title="Найти" value="Найти">
+            </form>
+            @Html.ActionLink("Расширенный поиск", "Advance", "Search")
+        </div>
+
+    </header>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3">
+                <div id="LeftPanel">
+                    <div align="center">
+                        <img src="~/Content/navigation.gif" />
+                        <strong>Книги по разделам</strong>
+                    </div>
+                    <hr />
+                    <nav>
+                        <ul>
+                            @{
+                                <li>@Html.ActionLink("ГЛАВНАЯ", "Index", "Genre", new { genreid = 0, page = 0 }, null)</li>
+                                if (ViewBag.Genre != null)
+                                {
+                                    foreach (Genre Genre in ViewBag.Genre)
+                                    {
+                                        <li>@Html.ActionLink(Genre.GenreName, "Index", "Genre", new { genreid =                     @Genre.GenreID, page = 0 }, null)</li>
+                                    }
+                                }
+                            }
+                        </ul>
+                    </nav>
+                </div>
+
+                <div class="clear"></div>
+
+                <div align="center" class="login">
+
+                    @Html.Partial("PartialLoginForm")
+                    @*@Html.Partial("_LoginPartial")*@
+
+                </div>
+
+
+
+            </div>
+
+
+            <div class="col-md-9 " id="Content">
+
+                @RenderBody()
+
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <div align="center">
+            <span>Mirknig 150 000 книг в бесплатном онлайн чтении.</span>
+        </div>
+    </footer>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

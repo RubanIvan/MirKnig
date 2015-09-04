@@ -1,0 +1,46 @@
+﻿@model System.Collections.Generic.List<WebApplication4.FindBook_Result>
+
+@{
+    //ViewBag.Title = "title";
+
+}
+
+@Html.Partial("PartialFindNavPanel")
+
+<div class="FindBlock">
+    @foreach (FindBook_Result BookRow in Model)
+    {
+
+        <div class="FindRow">
+            <a href=@Url.Action("Index", "Book", new {bookid = BookRow.BookId})>
+                <img src="/Content/Img/@BookRow.CoverFileName" />
+            </a>
+
+            <div class="FindRowText">
+                <a href=@Url.Action("Index", "Book", new {bookid = BookRow.BookId})>
+                    <h2>@BookRow.Title</h2>
+                </a>
+
+                <hr />
+                <p>@BookRow.Author</p>
+
+                @if (BookRow.Description.Length < 200)
+                {
+                    <p>@BookRow.Description</p>
+                }
+                else
+                {
+                    <p>@BookRow.Description.Substring(0, 200)...</p>
+                }
+
+
+
+            </div>
+        </div>
+        <div class="clear"></div>
+
+
+    }
+
+</div>
+

@@ -1,0 +1,212 @@
+﻿body {
+  font-size: 1.2em;
+  font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+  color: #0D377C;
+  background-color: #fff;
+}
+.clear {
+  clear: both;
+}
+a:link,
+a:visited {
+  text-decoration: none;
+}
+.row {
+  margin: 10px;
+}
+header,
+footer,
+nav,
+section {
+  display: block;
+}
+.container-fluid {
+  padding: 0;
+}
+hr {
+  margin: 10px;
+  height: 0;
+  border: solid #bbb 0;
+  border-top-width: 1px;
+}
+header {
+  position: relative;
+  padding: 10px 10px;
+  border: 1px solid #ccc;
+  margin: 10px 10px;
+  margin-top: 10px;
+  background-color: #fff;
+  border-radius: 3px;
+  -webkit-box-shadow: 1px 0 0 #fff inset, 0 1px 0 #fff inset;
+  box-shadow: 0 0 10px 1px #dddddd;
+}
+header .Logo {
+  position: relative;
+  width: 100px;
+}
+header .search {
+  float: right;
+  margin-top: -50px;
+}
+#LeftPanel {
+  float: left;
+  padding: 10px 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: black;
+  border-radius: 3px;
+  -webkit-box-shadow: 1px 0 0 #fff inset, 0 1px 0 #fff inset;
+  box-shadow: 0 0 10px 1px #dddddd;
+  width: 100%;
+}
+#LeftPanel ul li {
+  list-style-image: url("/Content/punkt.gif");
+  list-style-type: disc;
+  text-align: left;
+  text-decoration: none;
+  margin: 2px;
+}
+#LeftPanel ul li:first-child {
+  font-weight: bold;
+}
+#LeftPanel ul li a {
+  color: #0D377C;
+  font-size: 100%;
+}
+.login {
+  padding: 10px 10px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: black;
+  border-radius: 3px;
+  -webkit-box-shadow: 1px 0 0 #fff inset, 0 1px 0 #fff inset;
+  box-shadow: 0 0 10px 1px #dddddd;
+  margin-top: 20px;
+}
+.login .LoginForm {
+  margin-right: 20px;
+}
+.login .LoginForm input {
+  margin-bottom: 5px;
+  width: 150px;
+}
+.pagenav ul li {
+  display: inline-block;
+  text-decoration: none;
+  background: #fff;
+  padding: 2px 5px;
+  border: 1px solid #ccc;
+  color: #ccc;
+  font-size: 110%;
+}
+.infoboxStory {
+  padding: 10px 10px;
+  border: 1px solid #ccc;
+  color: #1c1c1c;
+  position: relative;
+  float: left;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  background-color: #fff;
+  width: 100%;
+  border-radius: 3px;
+  -webkit-box-shadow: 1px 0 0 #fff inset, 0 1px 0 #fff inset;
+  box-shadow: 0 0 10px 1px #dddddd;
+}
+.infoboxStory h2 {
+  font-weight: bold;
+  font-size: 130%;
+  color: #0d377c;
+  margin: 0;
+}
+.infoboxStory .booklink {
+  background-color: #faf9bb;
+  margin-left: 330px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.infoboxStory .booklink a {
+  color: #0d377c;
+  font-weight: bold;
+}
+.BookCover {
+  display: block;
+  float: left;
+}
+.BookCover img {
+  width: 300px;
+  height: auto;
+  margin: 10px 15px 10px 15px;
+}
+.BookHeader {
+  font-weight: bold;
+}
+.content {
+  padding-left: 0;
+}
+#Content {
+  padding: 0;
+  padding-left: 10px;
+}
+.BookCoverText {
+  font-size: 110%;
+}
+footer {
+  color: black;
+  height: 50px;
+  background: url(/Content/line.gif) repeat;
+}
+footer div {
+  padding-top: 15px;
+}
+.FindBlock .FindRow {
+  padding: 10px 10px;
+  border: 1px solid #ccc;
+  color: #1c1c1c;
+  position: relative;
+  float: left;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  background-color: #fff;
+  width: 100%;
+  border-radius: 3px;
+  -webkit-box-shadow: 1px 0 0 #fff inset, 0 1px 0 #fff inset;
+  box-shadow: 0 0 10px 1px #dddddd;
+}
+.FindBlock .FindRow .FindRowText {
+  /*padding-left:10px;*/
+  margin-left: 110px;
+  /*background-color: aquamarine;*/
+}
+.FindBlock .FindRow img {
+  width: 100px;
+  float: left;
+  position: relative;
+  margin-bottom: 10px;
+}
+.FindBlock .FindRow h2 {
+  margin: 0;
+  font-size: 110%;
+  font-weight: bold;
+  padding: 5px;
+  /*padding-left :20px;*/
+}
+.FindBlock .FindRow hr {
+  margin: 0;
+  margin-bottom: 10px;
+}
+.comments {
+  padding: 10px 10px;
+  border: 1px solid #ccc;
+  color: #1c1c1c;
+  position: relative;
+  float: left;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  background-color: #fff;
+  width: 100%;
+  border-radius: 3px;
+  -webkit-box-shadow: 1px 0 0 #fff inset, 0 1px 0 #fff inset;
+  box-shadow: 0 0 10px 1px #dddddd;
+}
+/*# sourceMappingURL=Site.css.map */

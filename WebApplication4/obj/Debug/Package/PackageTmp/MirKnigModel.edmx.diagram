@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5279a737422b4876a57c628a7b7e625f" Name="Diagram1">
+        <EntityTypeShape EntityType="MirKnigModel.Book" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MirKnigModel.Genre" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MirKnigModel.Language" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="MirKnigModel.FK_Book_GenreID" ManuallyRouted="false" />
+        <AssociationConnector Association="MirKnigModel.FK_Book_LanguageID" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MirKnigModel.C__MigrationHistory" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="MirKnigModel.AspNetRoles" Width="1.5" PointX="3.375" PointY="6.375" />
+        <EntityTypeShape EntityType="MirKnigModel.AspNetUserClaims" Width="1.5" PointX="7.875" PointY="5" />
+        <EntityTypeShape EntityType="MirKnigModel.AspNetUserLogins" Width="1.5" PointX="7.875" PointY="7.5" />
+        <EntityTypeShape EntityType="MirKnigModel.AspNetUsers" Width="1.5" PointX="5.625" PointY="5.375" />
+        <AssociationConnector Association="MirKnigModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="MirKnigModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="MirKnigModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="MirKnigModel.Comments" Width="1.5" PointX="7.875" PointY="2" />
+        <AssociationConnector Association="MirKnigModel.FK_Comments_UserID" />
+        <AssociationConnector Association="MirKnigModel.FK_Comments_BookID" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
